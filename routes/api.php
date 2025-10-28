@@ -31,7 +31,7 @@ Route::post('/login', ['as'=>'login', AuthController::class, 'loginUser']);
 Route::post('/register', [AuthController::class, 'createUser']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
-    Route::post('/logout',[AuthController::class,'logout']);
+    Route::post('/logout',[AuthController::class,'logout'])/*->middleware('restrictRole:guest')*/;
 });
 
 //Route::middleware('auth')->group(function () {

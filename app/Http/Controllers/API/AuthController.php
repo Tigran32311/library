@@ -49,8 +49,8 @@ class AuthController extends Controller
                 'last_name' => $request->last_name,
                 'second_name' => $request->second_name,
                 'birthday' => $request->birthday,
-                'is_active' => '1',
-                'role' => 'simpleUser'
+                'is_active' => true,
+                'role' => 'guest'
             ]);
 
             return response()->json([
