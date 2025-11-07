@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\Events\EventsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,6 +33,9 @@ Route::post('/register', [AuthController::class, 'createUser']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/logout',[AuthController::class,'logout'])/*->middleware('restrictRole:guest')*/;
+    Route::prefix('events')->group(function () {
+        Route::get('/list',[EventsController::class,'list']);
+    });
 });
 
 //Route::middleware('auth')->group(function () {
