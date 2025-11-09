@@ -13,14 +13,17 @@ class EventsController extends Controller
     public function list()
     {
         $user = auth('sanctum')->id();
-        $userData = User::where('id', $user)->first();
+        $userData = User::find($user);
         $events = Events::where('org_id',$userData->org_id)->get();
-
         return response()->json([
-            'status' => true,
-            'data' => $events,
-        ]);
-//        dd($userData->org_id);
+            'data' => $events->map(function ($event) {
+                return [
+                    'id' => $event->id,
+                    'name' => $event->name,
+                    'description' => $event->description,
+                ];
+            }),
+        ], 200);
     }
 
     public function detail()
